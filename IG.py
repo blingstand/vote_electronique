@@ -1,12 +1,14 @@
 import tkinter
 from tkinter import messagebox
-#valider crée une messagebox
+#les 2 vars de l'alerte recup les résultats de entries
 
-pseudo = "roger"
-mdp = "legris"
+
 #à remplir plus tard
 def valider() :
-  messagebox.showinfo("Valider", "Confirmez-vous ceci ?\n\n pseudo = {},\nmot de passe = {}. ".format(pseudo,mdp))
+  nom  = str(entry_nom.get())
+  mdp = str(entry_mdp.get())
+  messagebox.showinfo("Valider", "Confirmez-vous ceci ?\n\n nom = {},\nmot de passe = {}. ".format(nom,mdp))
+  fenetre.destroy()
 
 #CSS
 titel_font = "times 24 bold"
@@ -26,13 +28,11 @@ label_titel = tkinter.Label(frame_principal, text = "Identification", font = tit
 label_titel.pack(padx = 1, pady = 1 )
 
 #1ere entry
-val_nom = tkinter.StringVar()
 entry_nom = tkinter.Entry(frame_principal, textvariable = "", width = 15, font = entry_font )
 entry_nom.pack(padx = 1, pady = 2)
 
 #2e entry
-val_mdp= tkinter.StringVar()
-entry_mdp = tkinter.Entry(frame_principal, textvariable = "", width = 15, font = entry_font  )
+entry_mdp = tkinter.Entry(frame_principal, textvariable = "", width = 15, font = entry_font, show = "*"  )
 entry_mdp.pack(padx = 2, pady = 2)
 
 #bouton
