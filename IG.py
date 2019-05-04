@@ -1,14 +1,20 @@
 import tkinter
 from tkinter import messagebox
 
-#1er messbox explication
+#2e messbox "feedback identification"
 
 
 def valider() :
   pseudo = str(entry_pseudo.get())
   mdp = str(entry_mdp.get())
-  messagebox.askokcancel("Valider", "Je vérifie vos identifiants")
-  fenetre.destroy()
+  messagebox.showinfo("Valider", "Je vérifie vos identifiants")
+  if pseudo == "root" and mdp == "" :
+    messagebox.showinfo("Info","Identification réussie ! ")
+    fenetre.destroy()
+  else :
+    rep = messagebox.askretrycancel("Erreur", "Recommencez ou quittez.")
+    if not rep :
+      fenetre.destroy()
 
 couleur_champ_entry = "#fff0b3"
 def clean_entry_pseudo(event):
@@ -56,7 +62,7 @@ label_titel.pack(padx = 1, pady = 1 )
 entry_pseudo = tkinter.Entry(frame_principal, textvariable = "", width = 25, font = entry_font )
 entry_pseudo.insert(0, "Entrez votre pseudo ...")
 entry_pseudo.focus_set()
-entry_pseudo.bind("<Key>", clean_entry_pseudo)
+entry_pseudo.bind("<Button-1>", clean_entry_pseudo)
 entry_pseudo.bind("<FocusOut>", focusout_pseudo)
 entry_pseudo.pack(padx = 1, pady = 2)
 
