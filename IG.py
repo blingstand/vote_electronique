@@ -1,8 +1,12 @@
 import tkinter
+from tkinter import messagebox
+#valider crée une messagebox
 
+pseudo = "roger"
+mdp = "legris"
 #à remplir plus tard
 def valider() :
-  pass
+  messagebox.showinfo("Valider", "Confirmez-vous ceci ?\n\n pseudo = {},\nmot de passe = {}. ".format(pseudo,mdp))
 
 #CSS
 titel_font = "times 24 bold"
@@ -32,7 +36,7 @@ entry_mdp = tkinter.Entry(frame_principal, textvariable = "", width = 15, font =
 entry_mdp.pack(padx = 2, pady = 2)
 
 #bouton
-button_valider = tkinter.Button(frame_principal, text = "valider", command=valider, width = 30, font = button_font)
+button_valider = tkinter.Button(frame_principal, cursor = "dotbox", text = "Valider", command=valider, width = 30, font = button_font)
 button_valider.pack(padx = 1, pady = 3)
 
 fenetre.mainloop()
