@@ -1,13 +1,13 @@
 import tkinter
 from tkinter import messagebox
 
-#mouss-out entry + "*" mdp
+#1er messbox explication
 
 
 def valider() :
   pseudo = str(entry_pseudo.get())
   mdp = str(entry_mdp.get())
-  messagebox.showinfo("Valider", "Confirmez-vous ceci ?\n\n pseudo = {},\nmot de passe = {}. ".format(pseudo,mdp))
+  messagebox.askokcancel("Valider", "Je vérifie vos identifiants")
   fenetre.destroy()
 
 couleur_champ_entry = "#fff0b3"
