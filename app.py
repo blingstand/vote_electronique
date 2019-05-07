@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from time import sleep
 
-#compoFen2
+#valider_euro()
 
 
 class App(tk.Tk) :
@@ -27,8 +27,6 @@ class App(tk.Tk) :
     self.geometry("600x300")
     self.title("Vote électronique")
     self.compoFen1()
-    self.destComposants([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
-    self.compoFen2()
     self.mainloop()
 
   def compoFen1(self):
@@ -104,7 +102,7 @@ class App(tk.Tk) :
     messagebox.showinfo("Valider", "Je vérifie vos identifiants")
     if str(self.entry_pseudo.get()) == self.PSEUDO_ATTENDU and str(self.entry_mdp.get()) == self.MDP_ATTENDU :
       messagebox.showinfo("Info","Identification réussie ! ")
-      self.destComposants1([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
+      self.destComposants([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
       self.compoFen2()
     else :
       rep = messagebox.askretrycancel("Erreur", "Recommencez ou quittez.")
