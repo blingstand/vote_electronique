@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-import time
+from time import sleep
 
 #compoFen2
 
@@ -16,7 +16,7 @@ class App(tk.Tk) :
   MDP_ATTENDU = "123"
   #Question
   QUESTION = "Pour qui voulez-vous voter le 25 mai 2019 ? "
-  #liste européenne
+  #liste
   LISTE_EURO = ("l'Union Populaire Républicaine", "la France Insoumise", "les Républicains", "Debout la France", "Le Rassemblement National", "Place Publique - Parti Socialiste", "Europe Ecologie les Verts", "La République en Marche", "Le Parti Communiste", "l'Union des Démocrates Indépendants", "Génération.s", "les Patriotes" )
 
   def __init__(self):
@@ -27,8 +27,8 @@ class App(tk.Tk) :
     self.geometry("600x300")
     self.title("Vote électronique")
     self.compoFen1()
-    # self._destComponents1()
-    # self.compoFen2()
+    self.destComposants([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
+    self.compoFen2()
     self.mainloop()
 
   def compoFen1(self):
@@ -75,16 +75,27 @@ class App(tk.Tk) :
 
 
     # self.liste_partis.pack()
-  def _destComponents1(self):
+
+  def destComposants(self, liste):
     """
-    détruit les composant de la première fenêtre
+    détruit les composant de la deuxième fenêtre
     """
-    liste_components = [self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider]
-    for i in liste_components :
+    for i in liste :
       i.destroy()
 
   def valider_euro(self):
-    pass
+    """
+    valide le choix de la spinbox (spinb_euro), envoie au serveur les données, remercie et ferme
+    """
+    print(str(self.spinb_euro.get()))
+    #rajouter ici l'écriture dans la bdd
+    self.destComposants([self.spinb_euro, self.button_valider_euro])
+
+    self.label_titel.config(text="Merci de votre participation")
+    self.label_titel.place(x = 140, y = 130)
+    self.update()
+    sleep(2) #2 sec de merci et on ferme
+    self.destroy()
 
   def valider(self) :
     """
@@ -93,12 +104,12 @@ class App(tk.Tk) :
     messagebox.showinfo("Valider", "Je vérifie vos identifiants")
     if str(self.entry_pseudo.get()) == self.PSEUDO_ATTENDU and str(self.entry_mdp.get()) == self.MDP_ATTENDU :
       messagebox.showinfo("Info","Identification réussie ! ")
-      self._destComponents1()
+      self.destComposants1([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
       self.compoFen2()
     else :
       rep = messagebox.askretrycancel("Erreur", "Recommencez ou quittez.")
       if not rep :
-        self._destComponents1()
+        self.destroy()
       else :
         self.entry_pseudo.delete(0, "end")
         self.entry_pseudo.insert(0, "Entrez votre pseudo ...")
