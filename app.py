@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from time import sleep
+import identification
 
 #valider_euro()
 
@@ -11,9 +12,6 @@ class App(tk.Tk) :
   TITEL_FONT = "times 20 bold"
   ENTRY_FONT = "times 15"
   BUTTON_FONT = "times 20 bold"
-  #espace identifiants
-  PSEUDO_ATTENDU = "root"
-  MDP_ATTENDU = "123"
   #Question
   QUESTION = "Pour qui voulez-vous voter le 25 mai 2019 ? "
   #liste
@@ -85,8 +83,9 @@ class App(tk.Tk) :
     """
     valide le choix de la spinbox (spinb_euro), envoie au serveur les données, remercie et ferme
     """
-    print(str(self.spinb_euro.get()))
-    #rajouter ici l'écriture dans la bdd
+    print("Envoie en cours ...")
+    user.envoie_vote(self.LISTE_EURO.index(self.spinb_euro.get()))
+    print(self.LISTE_EURO.index(self.spinb_euro.get()))
     self.destComposants([self.spinb_euro, self.button_valider_euro])
 
     self.label_titel.config(text="Merci de votre participation")
@@ -100,7 +99,9 @@ class App(tk.Tk) :
     Vérifie les identifiants lorsque je clique sur le bouton Valider
     """
     messagebox.showinfo("Valider", "Je vérifie vos identifiants")
-    if str(self.entry_pseudo.get()) == self.PSEUDO_ATTENDU and str(self.entry_mdp.get()) == self.MDP_ATTENDU :
+    global user
+    user = identification.User(self.entry_pseudo.get(),self.entry_mdp.get())
+    if user.identification() :
       messagebox.showinfo("Info","Identification réussie ! ")
       self.destComposants([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
       self.compoFen2()
