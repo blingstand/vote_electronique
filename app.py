@@ -100,7 +100,7 @@ class App(tk.Tk) :
     messagebox.showinfo("Valider", "Je vérifie vos identifiants")
     global user
     user = identification.User(self.entry_pseudo.get(),self.entry_mdp.get())
-    if user.identification() :
+    if user.verif_idtf() :
       messagebox.showinfo("Info","Identification réussie ! ")
       self.destComposants([self.label_titel, self.entry_pseudo, self.entry_mdp, self.button_valider])
       self.compoFen2()
