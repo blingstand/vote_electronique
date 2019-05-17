@@ -1,12 +1,12 @@
 import mysql.connector
 
-#fonction envoie_vote()
+#fonction recup data
 
-class User(object):
-  """docstring for user"""
-  def __init__(self, pseudo, mdp):
-    self.pseudo = pseudo
-    self.mdp = mdp
+class Connection() :
+
+  LISTE_EURO = ("l'Union Populaire Républicaine", "la France Insoumise", "les Républicains", "Debout la France", "Le Rassemblement National", "Place Publique - Parti Socialiste", "Europe Ecologie les Verts", "La République en Marche", "Le Parti Communiste", "l'Union des Démocrates Indépendants", "Génération.s", "les Patriotes" )
+
+  def __init__(self):
     self.mydb = mysql.connector.connect(
       host = "localhost",
       user = "root",
@@ -14,6 +14,26 @@ class User(object):
       database = "conn_python"
       )
     self.my_cursor = self.mydb.cursor()
+
+  def recup_data(self, vote = "default"):
+    """
+    Cette fonction récupère le nombre de votant pour chaque vote
+    """
+    sql = "CALL compteur_vote();"
+    self.my_cursor.execute(sql)
+    my_result = self.my_cursor.fetchall()
+
+    for i in my_result :
+      print("Vote pour {} -> {} votant(s).".format(self.LISTE_EURO[i[0]-1], i[1]))
+
+
+class User(Connection):
+  """docstring for user"""
+  def __init__(self, pseudo, mdp):
+    super().__init__()
+    self.pseudo = pseudo
+    self.mdp = mdp
+
 
   def identification(self):
     """
@@ -40,3 +60,5 @@ class User(object):
 
     # except :
     #   print("Une erreur est survenue =(")
+
+

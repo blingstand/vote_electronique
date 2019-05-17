@@ -85,7 +85,6 @@ class App(tk.Tk) :
     """
     print("Envoie en cours ...")
     user.envoie_vote(self.LISTE_EURO.index(self.spinb_euro.get()))
-    print(self.LISTE_EURO.index(self.spinb_euro.get()))
     self.destComposants([self.spinb_euro, self.button_valider_euro])
 
     self.label_titel.config(text="Merci de votre participation")
