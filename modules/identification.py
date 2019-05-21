@@ -9,7 +9,7 @@ Remarque(s) :
 """
 
 
-liste_euro = ("l'Union Populaire Républicaine", "la France Insoumise", "les Républicains", "Debout la France", "Le Rassemblement National", "Place Publique - Parti Socialiste", "Europe Ecologie les Verts", "La République en Marche", "Le Parti Communiste", "l'Union des Démocrates Indépendants", "Génération.s", "les Patriotes" )
+liste_euro = ("Abstention", "l'Union Populaire Républicaine", "la France Insoumise", "les Républicains", "Debout la France", "Le Rassemblement National", "Place Publique - Parti Socialiste", "Europe Ecologie les Verts", "La République en Marche", "Le Parti Communiste", "l'Union des Démocrates Indépendants", "Génération.s", "les Patriotes" )
 
 def deco_recup_data(func):
   """ Il donne à la fonction recup data un texte présentatif avec des retours à la ligne  """
@@ -18,7 +18,7 @@ def deco_recup_data(func):
       resultat =  func(*args, **kwargs)
       result_print = []
       for i in resultat :
-        result_print.append("Vote pour {} -> {} votant(s).".format(liste_euro[i[0]-1], i[1]))
+        result_print.append("Vote pour {} -> {} votant(s).".format(liste_euro[i[0]], i[1]))
       return True, result_print
     except :
       return False, "Erreur dans la requête sql"
